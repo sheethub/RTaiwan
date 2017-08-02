@@ -1,12 +1,11 @@
 Package: RTaiwan
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Manipulating Spatial Data of Taiwan
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Wush Wu
+Maintainer: Wush Wu <wush@muyueh.com>
+Description: Providing helper functions and examples of manipulating spatial data of Taiwan.
+License: GPL (>= 3)
 Encoding: UTF-8
 Depends: sp
 Imports: maptools, rgeos
