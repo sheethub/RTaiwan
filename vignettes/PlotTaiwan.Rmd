@@ -1,11 +1,11 @@
 ---
-title: "Plotting Taiwan with "
+title: "Plotting Taiwan with RTaiwan and mapview"
 output: 
   rmarkdown::html_vignette:
     toc: yes
 author: Wush Wu
 vignette: >
-  %\VignetteIndexEntry{TaiwanLeafplot}
+  %\VignetteIndexEntry{PlotTaiwan}
   %\VignetteEngine{knitr::rmarkdown}
   \usepackage[utf8]{inputenc}
 ---
