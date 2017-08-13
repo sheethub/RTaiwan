@@ -1,7 +1,7 @@
 Package: RTaiwan
 Type: Package
 Title: Manipulating Spatial Data of Taiwan
-Version: 0.1.0
+Version: 0.1.1
 Author: Wush Wu
 Maintainer: Wush Wu <wush@muyueh.com>
 Description: Providing helper functions and examples of manipulating spatial data of Taiwan.
@@ -9,5 +9,6 @@ License: GPL (>= 3)
 Encoding: UTF-8
 Depends: sp
 Imports: maptools, rgeos
+Suggests: leafletR
 LazyData: false
 RoxygenNote: 6.0.1
