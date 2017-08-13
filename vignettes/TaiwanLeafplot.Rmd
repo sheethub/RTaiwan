@@ -1,0 +1,73 @@
+---
+title: "Plotting Taiwan with "
+output: 
+  rmarkdown::html_vignette:
+    toc: yes
+author: Wush Wu
+vignette: >
+  %\VignetteIndexEntry{TaiwanLeafplot}
+  %\VignetteEngine{knitr::rmarkdown}
+  \usepackage[utf8]{inputenc}
+---
+
+```{r setup, include = FALSE}
+library(RTaiwan)
+library(mapview)
+library(dplyr)
+```
+
+## Initialization
+
+Please install and `library` following packages first:
+
+```r
+# install.packages("remotes") 
+remotes::install_github("sheethub/RTaiwan")
+remotes::install_github("r-spatial/mapview")
+install.packages(c("dplyr"))
+library(RTaiwan)
+library(mapview)
+library(dplyr)
+```
+
+## Loading Data
+
+Loading the `SpatialPolygonsDataFrame` objects from RTaiwan:
+
+```{r}
+data(TaiwanTownArea, package = "RTaiwan")
+```
+
+## Create Interactive Spatial Plot
+
+```{r}
+mapview(TaiwanTownArea)
+```
+
+### Population
+
+Download the populations from sheethub:
+
+```{r, eval = FALSE}
+populations <- read.csv(url("https://sheethub.com/ronnywang/%E5%85%A8%E5%9C%8B%E4%BA%BA%E5%8F%A3%E7%B5%B1%E8%A8%88_%E9%84%89%E9%8E%AE%E5%B8%82%E5%8D%80_104%E5%B9%B46%E6%9C%88?format=csv"))
+```
+
+```{r, echo = FALSE}
+populations <- read.csv("populations.csv")
+```
+
+Join the data to the object `TaiwanTownArea`
+
+```{r}
+populations[["鄉鎮市區代碼"]] <- as.character(populations[["鄉鎮市區代碼"]])
+.data <- left_join(TaiwanTownArea@data, populations, by = c(TOWN_ID = "鄉鎮市區代碼"))
+TaiwanTownArea@data <- .data
+TaiwanTownArea <- TaiwanTownArea[!is.na(TaiwanTownArea@data[["人口數"]]),]
+```
+
+View the populations:
+
+```{r}
+TaiwanTownArea@data[["人口級距"]] <- cut(TaiwanTownArea@data[["人口數"]], breaks = quantile(TaiwanTownArea@data[["人口數"]], seq(0, 1, by = 0.1)), include.lowest = TRUE)
+mapview(TaiwanTownArea, zcol = "人口級距", legend = TRUE)
+```
